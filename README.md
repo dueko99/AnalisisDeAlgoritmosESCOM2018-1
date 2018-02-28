@@ -6,3 +6,4 @@ Grupo: 3CM3
 
 Integrantes:
 Meza Madrid Raúl Damián
+Montaño Ayala Alan Israel
