@@ -1,24 +1,54 @@
+/*
+Implementación Práctica 01: Pruebas a posteriori (Algoritmos de Ordenamiento)
+Por: 
+Versión: 1.0
+
+Descripción: Funciones Auxiliares del Algoritmo de Ordenamiento por medio de un 
+	Árbol Binario de Búsqueda (ABB)
+	
+Observaciones: 
+*/
+
+
+//LIBRERÍAS
 #include "stdlib.h"
 
-typedef long int li;
-
+//DEFINICIONES DE ESTRUCTURAS
 typedef struct node
 {
 	struct node *left, *right;
-	li number;
+	int number;
 }node;
 
+//DEFINICIONES DE SINÓNIMOS
 typedef node* position;
 typedef position arbol_bin;
 
+
+
+//DEFINICIÓN DE FUNCIONES
+
+/*
+Descripción: Función encargada de inicializar la estructura del ABB
+Recibe: arbol_bin *BinaryTree (apuntador al ABB declarado por el usuario)
+Devuelve: 
+Observaciones: 
+*/
 void Initialize(arbol_bin *BinaryTree){
 	*BinaryTree = NULL;
 	return;
 }
 
-void Insert(arbol_bin * BinaryTree, li newNumber){
-	arbol_bin * aux = BinaryTree;
-	while(*aux != NULL){
+/*
+Descripción: Función encargada de insertar un nuevo elemento en el ABB
+Recibe: arbol_bin * BinaryTree (apuntador al ABB utilizado por el usuario), 
+	int newNumber (nuevo elemento que se va a incluir en el ABB)
+Devuelve: 
+Observaciones: 
+*/
+void Insert(arbol_bin * BinaryTree, int newNumber){
+	arbol_bin * aux = BinaryTree; 											
+	while(*aux != NULL){												
 		if (newNumber > ((*aux)->number))
 		{
 			aux = &((*aux)->right);
@@ -34,13 +64,20 @@ void Insert(arbol_bin * BinaryTree, li newNumber){
 	return;
 }
 
-void InorderTraversal(arbol_bin *BinaryTree, li* Data, li size){
+/*
+Descripción: Función encargada de hacer el recorrido inorden por el ABB
+Recibe: arbol_bin *BinaryTree (apuntador al ABB utilizado por el usuario),
+	int* Data (arreglo que contiene los números), int size (cantidad de números)
+Devuelve: 
+Observaciones: 
+*/
+void InorderTraversal(arbol_bin *BinaryTree, int* Data, int size){
 
 	position auxPos = *BinaryTree;
 
 	node ** Stack = (node**)malloc(size*sizeof(arbol_bin));
 
-	li stackTop = -1, i = 0;
+	int stackTop = -1, i = 0;
 
 	do{
 		while(auxPos != NULL){
@@ -60,6 +97,12 @@ void InorderTraversal(arbol_bin *BinaryTree, li* Data, li size){
 	return;
 }
 
+/*
+Descripción: Función encargada de liberar el espacio ocupado por el ABB
+Recibe: arbol_bin *BinaryTree (apuntador al ABB utilizado por el usuario)
+Devuelve: 
+Observaciones: 
+*/
 void Destroy(arbol_bin *BinaryTree){
 	if(*BinaryTree == NULL)
 		return;
