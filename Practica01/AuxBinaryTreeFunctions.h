@@ -1,6 +1,6 @@
 /*
 Implementación Práctica 01: Pruebas a posteriori (Algoritmos de Ordenamiento)
-Por: 
+Por: Equipo Arbol
 Versión: 1.0
 
 Descripción: Funciones Auxiliares del Algoritmo de Ordenamiento por medio de un 
