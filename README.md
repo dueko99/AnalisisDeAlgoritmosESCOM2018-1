@@ -6,8 +6,8 @@ Profesor: Edgardo Adrian Franco
 
 Grupo: 3CM3
 
-Integrantes:
--
+Equipo: Git Gud (Equipo Arbol)
+--
 Calva Hernández José Manuel 2017630201
 
 Meza Madrid Raúl Damián 2017631051
