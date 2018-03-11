@@ -35,7 +35,8 @@ void SimpleBubbleSort(int * Data,int size){
 Descripción: Función encargada de ordenar los números por medio del algoritmo de Burbuja Optimizada
 Recibe: int * Data (arreglo de números a ordenar), int size (cantidad de números)
 Devuelve: 
-Observaciones: 
+Observaciones: A comparacion del algoritmo proporcionado, la variable changes tiene que initializarze
+como 1, de lo contrario no entrará en el ciclo. 
 */
 void OptimizedBubbleSort(int *Data, int size){
   int changes=1;
