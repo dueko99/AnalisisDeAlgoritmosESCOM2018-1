@@ -19,7 +19,7 @@ Observaciones:
 Descripción: Función encargada de ordenar los números por medio del algoritmo de Shell
 Recibe: int * Data (arreglo de números a ordenar), int size (cantidad de números)
 Devuelve: 
-Observaciones: 
+Observaciones: A comparacion del algorimos proporcionado, el for va de i<=size-1 en vez de >=
 */
 void ShellSort(int *Data, int size){
   int k =trunc(size/2);
