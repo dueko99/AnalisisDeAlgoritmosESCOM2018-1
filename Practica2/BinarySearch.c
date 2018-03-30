@@ -68,6 +68,6 @@ int main(int argc,char **argv){
 	} else {
 		printf("Valor NO encontrado\n");
 	}
-	//imprimeTiempos(size,utime0, stime0, wtime0,utime1, stime1, wtime1);
+	imprimeTiempos(size,utime0, stime0, wtime0,utime1, stime1, wtime1);
 	free(Data);
 }
