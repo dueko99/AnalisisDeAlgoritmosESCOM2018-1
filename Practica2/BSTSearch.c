@@ -3,15 +3,15 @@ Implementación Práctica 02: Análisis temporal y notación de orden (Algoritmo
 Por: Git Gud (Equipo Arbol)
 Versión: 1.0
 
-Descripción: Programa que buscará por medio del método Binario o Dicotómico
+Descripción: Programa que buscará por medio de un Árbol Binario de Búsqueda
 
 Observaciones:
 
 Compilación:
 
-	gcc -o BinarySearch BinarySearch.c
+	gcc -o BSTSearch BSTSearch.c
 
-	./BinarySearch n k < SortedNumbers.txt >> Binary.txt
+	./BSTSearch n k < UnsortedNumbers.txt >> BST.txt
 
 	donde:
 		n es el tamaño de la búsqueda
@@ -31,7 +31,10 @@ bool found = false;
 int* Data;
 int nSize = 0, keyNumber = 0;
 
-#include "BinarySearch.h"
+#include "AuxBSTFunctions.h"
+arbol_bin mainTree;
+
+#include "BSTSearch.h"
 
 
 
@@ -43,6 +46,7 @@ Variables usadas en el programa:
 	int* Data: apuntador de entero que será inicializado como arreglo para los datos donde se buscará
 	int nSize: variable que tomará el tamaño de la línea de comando
 	int keyNumber: variable que indicará el número a buscar
+	arbol_bin mainTree: estructura que simulará el ABB usado
 	double utime0: variable que medirá el tiempo de inicio de ejecución del usuario
 	double stime0: variable que medirá el tiempo de inicio de ejecución del sistema
 	double wtime0: variable que medirá el tiempo de inicio de ejecución real
@@ -51,8 +55,7 @@ Variables usadas en el programa:
 	double wtime1: variable que medirá el tiempo de finalización de ejecución real
 	
 */
-int main(int argc, char const *argv[])
-{
+int main(int argc,char **argv){
 	if (argc < 3) exit(0);	// Verificación sencilla
 	
 	nSize = atoi(argv[1]);	// Identifica el número de datos sobre los que se va a trabajar
@@ -67,9 +70,15 @@ int main(int argc, char const *argv[])
 		scanf("%d", Data+i);			// Insertamos los números en el arreglo
 	}
 
+	Initialize(&mainTree);	// Iniciamos nuestro ABB para usarlo
+
+	for(int i = 0; i < nSize; ++i){
+		Insert(&mainTree, Data[i]);	// Insertamos los datos en el ABB
+	}
+
 	uswtime(&utime0, &stime0, &wtime0);		// Iniciamos los contadores de tiempo
 
-	BinarySearch();	// Función que realiza la búsqueda
+	BSTSearch();	// Función que realiza la búsqueda
 
 	uswtime(&utime1, &stime1, &wtime1);		// Finalizamos los contadores de tiempo
 	
@@ -81,5 +90,6 @@ int main(int argc, char const *argv[])
 
 	free(Data);	// Liberamos el arreglo de números
 
-	return 0;
+	Destroy(&mainTree);	// Destruimos el ABB usado
+
 }

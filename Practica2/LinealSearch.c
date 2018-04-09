@@ -3,15 +3,15 @@ Implementación Práctica 02: Análisis temporal y notación de orden (Algoritmo
 Por: Git Gud (Equipo Arbol)
 Versión: 1.0
 
-Descripción: Programa que buscará por medio del método Binario o Dicotómico
+Descripción: Programa que buscará por medio del método Lineal o Secuencial
 
 Observaciones:
 
 Compilación:
 
-	gcc -o BinarySearch BinarySearch.c
+	gcc -o LinealSearch LinealSearch.c
 
-	./BinarySearch n k < SortedNumbers.txt >> Binary.txt
+	./LinealSearch n k < SortedNumbers.txt >> Lineal.txt
 
 	donde:
 		n es el tamaño de la búsqueda
@@ -31,7 +31,7 @@ bool found = false;
 int* Data;
 int nSize = 0, keyNumber = 0;
 
-#include "BinarySearch.h"
+#include "LinealSearch.h"
 
 
 
@@ -69,7 +69,7 @@ int main(int argc, char const *argv[])
 
 	uswtime(&utime0, &stime0, &wtime0);		// Iniciamos los contadores de tiempo
 
-	BinarySearch();	// Función que realiza la búsqueda
+	LinealSearch(); // Función que realizará la búsqueda
 
 	uswtime(&utime1, &stime1, &wtime1);		// Finalizamos los contadores de tiempo
 	

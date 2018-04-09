@@ -1,16 +1,17 @@
 /*
-Implementación Práctica 01: Pruebas a posteriori (Algoritmos de Ordenamiento)
-Por:
+Implementación Práctica 02: Análisis temporal y notación de orden (Algoritmos de búsqueda)
+Por: Git Gud (Equipo Arbol)
 Versión: 1.0
 
-Descripción: Programa secundario que se encargará de imprimir los tiempos de ejecución de los distintos programas
-
-Observaciones:
+Descripción: Programa encargado de imprimir los tiempos de ejecuión de los programas
+	
+Observaciones: 
 */
 
 
 //LIBRERÍAS
-#include "stdio.h"
+#include <stdio.h>
+#include <stdbool.h>
 
 
 
@@ -18,18 +19,36 @@ Observaciones:
 
 /*
 Descripción: Función encargada de imprimir los tiempos de ejecución de los programas
-Recibe: int size (número de datos que se ordenaron), double utime0 (tiempo de inicio del usuario),
-	double stime0 (tiempo de inicio del sistema), double wtime0 (tiempo de inicio real),
-	double utime1 (tiempo de finalización del usuario), double stime1 (tiempo de finalización del sistema),
-	double wtime1 (tiempo de finalización real)
+Recibe: 
+	bool found (indica si se encontró el número en la búsqueda)
+	int keyNumber (número que se buscó)
+	int nSize (número de datos sobre los que se realizó la búsqueda)
+	int nThreads (número de particiones hilos que se usaron en el programa)
+	double SysTime (tiempo del sistema)
+	double UserTime (tiempo del usuario)
+	double RealTime (tiempo real)
 Devuelve:
 Observaciones: El tiempo se consigue por medio de la diferencia entre el tiempo de inicio y el final, el porcentaje de
 	tiempo dedicado a la ejecución vendría dado por la relación CPU/Wall
 */
-void imprimeTiempos(int size,double utime0,double stime0,double wtime0,double utime1,double stime1,double wtime1){
-	printf("%15d",size);
-	printf("%25.10f",  wtime1 - wtime0);
-	printf("%25.10f",  utime1 - utime0);
-	printf("%25.10f",  stime1 - stime0);
-	printf("%25.10f\n",100.0 * (utime1 - utime0 + stime1 - stime0) / (wtime1 - wtime0));
+void imprimeTiempos(bool found, int keyNumber, int nSize, double RealTime, double UserTime,double SysTime){
+	printf("%12d", keyNumber);
+	printf("%15d", nSize);
+	printf("%25.10f", RealTime);
+	printf("%25.10f", UserTime);
+	printf("%25.10f", SysTime);
+	printf("%10d\n", found);
 }
+
+/*void imprimeTiempos(bool found, int keyNumber, int nSize, double RealTime, double UserTime,double SysTime){
+	if (found)
+	{
+		printf("\nKey Number = %i found\n", keyNumber);
+	}else{
+		printf("\nKey Number = %i NOT found\n", keyNumber);
+	}
+	printf("With an n = %i\n", nSize);
+	printf("Real Time: \t%.10f\n", RealTime);
+	printf("User Time: \t%.10f \n", UserTime);
+	printf("System Time: \t%.10f\n", SysTime);
+}*/

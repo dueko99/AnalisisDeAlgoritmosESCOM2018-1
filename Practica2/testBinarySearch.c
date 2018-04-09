@@ -9,13 +9,10 @@ Observaciones:
 
 Compilación:
 
-	gcc -o BinarySearch BinarySearch.c
+	gcc -o testBinarySearch testBinarySearch.c
 
-	./BinarySearch n k < SortedNumbers.txt >> Binary.txt
+	./testBinarySearch < SortedNumbers.txt >> Binary.txt
 
-	donde:
-		n es el tamaño de la búsqueda
-		k es el valor a buscar
 */
 
 
@@ -27,9 +24,9 @@ Compilación:
 #include "imprimeTiempos.h"
 
 //VARIABLES GLOBALES
-bool found = false;
+bool found;
 int* Data;
-int nSize = 0, keyNumber = 0;
+int nSize = 10000000, keyNumber = 0;
 
 #include "BinarySearch.h"
 
@@ -53,10 +50,14 @@ Variables usadas en el programa:
 */
 int main(int argc, char const *argv[])
 {
-	if (argc < 3) exit(0);	// Verificación sencilla
-	
-	nSize = atoi(argv[1]);	// Identifica el número de datos sobre los que se va a trabajar
-	keyNumber = atoi(argv[2]);	// Asigna el número que se va a buscar
+	int aSizes[] = {100, 1000, 5000, 10000, 50000, 100000, 200000, 400000, 
+			600000, 800000, 1000000, 2000000, 3000000, 4000000, 5000000, 
+			6000000, 7000000, 8000000, 9000000, 10000000};
+
+	int aNumbers[] = {322486, 14700764, 3128036, 6337399, 61396, 10393545, 2147445644, 
+			1295390003, 450057883, 187645041, 1980098116, 152503, 5000, 1493283650, 
+			214826, 1843349527, 1360839354, 2109248666, 2147470852, 0};
+
 
 	double utime0, stime0, wtime0; 	// Tiempos de inicio
 	double utime1, stime1, wtime1;	// Tiempos de finalización
@@ -67,17 +68,28 @@ int main(int argc, char const *argv[])
 		scanf("%d", Data+i);			// Insertamos los números en el arreglo
 	}
 
-	uswtime(&utime0, &stime0, &wtime0);		// Iniciamos los contadores de tiempo
+	for (int i = 0; i < 20; ++i)
+	{
+		nSize = aSizes[i];
+		for (int j = 0; j < 20; ++j)
+		{
+			keyNumber = aNumbers[j];
 
-	BinarySearch();	// Función que realiza la búsqueda
+			found = false;
 
-	uswtime(&utime1, &stime1, &wtime1);		// Finalizamos los contadores de tiempo
-	
-	double RealTime = wtime1 - wtime0;	// Asignamos el tiempo real del proceso desde su inicio hasta su finalización
-	double UserTime = utime1 - utime0;	// Asignamos el tiempo que la CPU se ha dedicado exclusivamente a la computación del programa
-	double SysTime  = stime1 - stime0;	// Asignamos el tiempo que la CPU se ha dedicado a dar servicio al sistema operativo por necesidades del programa
-
-	imprimeTiempos(found, keyNumber, nSize, RealTime, UserTime, SysTime); // Función que mostrará los resultados
+			uswtime(&utime0, &stime0, &wtime0);		// Iniciamos los contadores de tiempo
+			
+			BinarySearch();	// Función que realiza la búsqueda
+		
+			uswtime(&utime1, &stime1, &wtime1);		// Finalizamos los contadores de tiempo
+			
+			double RealTime = wtime1 - wtime0;	// Asignamos el tiempo real del proceso desde su inicio hasta su finalización
+			double UserTime = utime1 - utime0;	// Asignamos el tiempo que la CPU se ha dedicado exclusivamente a la computación del programa
+			double SysTime  = stime1 - stime0;	// Asignamos el tiempo que la CPU se ha dedicado a dar servicio al sistema operativo por necesidades del programa
+		
+			imprimeTiempos(found, keyNumber, nSize, RealTime, UserTime, SysTime); // Función que mostrará los resultados
+		}
+	}
 
 	free(Data);	// Liberamos el arreglo de números
 
