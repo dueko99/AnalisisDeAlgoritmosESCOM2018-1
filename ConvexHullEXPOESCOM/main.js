@@ -10,10 +10,6 @@ Point.prototype.y = null;
 Point.prototype.graphic = null;
 Point.prototype.main_line = null;
 
-window
-
-
-
 window.onload = function () {
     Raphael.fn.line = function (startX, startY, endX, endY) {
         return this.path('M' + startX + ' ' + startY + ' L' + endX + ' ' + endY);
@@ -33,7 +29,7 @@ window.onload = function () {
         line = paper.line(p.x, p.y, p.x, p.y).attr({
             'stroke-linecap': 'round',
             'stroke-linejoin': 'round',
-            'stroke': '#38b749'
+            'stroke': '#23cec5'
         });
         p.main_line = line.animate({
             'stroke-width': '4',
@@ -88,7 +84,7 @@ window.onload = function () {
     function clear() {
         paper.clear();
         canvas = paper.rect(0, 0, 800, 800, 40).attr({
-            fill: '#7a2f2f',
+            fill: '#62a8ba',
             stroke: "none"
         });
         points = [];
@@ -108,7 +104,7 @@ window.onload = function () {
         locked = true;
         randombtn.attr('disabled', true);
         if (convexH == null) {
-            convexH = new ConvexHullAlgorithm(points, auxF);
+            convexH = new CHAlgorith(points, auxF);
         }
     }
 
@@ -128,12 +124,12 @@ window.onload = function () {
             running = true;
             lock();
             if (convexH == null) {
-                convexH = new ConvexHullAlgorithm(points, auxF);
+                convexH = new CHAlgorith(points, auxF);
             }
             runbtn.text('Pausa');
             clearbtn.attr('disabled', true);
             auxtimer = window.setInterval(function () {
-                r = convexH.step();
+                r = convexH.iterate();
                 if (!r) {
                     window.clearInterval(auxtimer);
                     runbtn.text('Terminado');
@@ -168,7 +164,7 @@ window.onload = function () {
     randombtn.click();
 };
 
-function ConvexHullAlgorithm(points, auxF) {
+function CHAlgorith(points, auxF) {
     this.States = {
         SORTING: 's',  
         MOVING: 'm',  
@@ -220,7 +216,7 @@ function ConvexHullAlgorithm(points, auxF) {
         }
     }
 
-    this.step = function () {
+    this.iterate = function () {
         switch (this.state) {
             case this.States.DONE:
                 return false;
@@ -228,7 +224,7 @@ function ConvexHullAlgorithm(points, auxF) {
             case this.States.SORTING:
                 this.convexSort();
                 this.state=this.States.MOVING;
-                return this.step();
+                return this.iterate();
 
             case this.States.MOVING:
                 if (this.i == 0 && this.toTheRight) {
@@ -272,7 +268,7 @@ function ConvexHullAlgorithm(points, auxF) {
                 n = this.ConvexHull.length;
                 if (n <= 2) {
                     this.state=this.States.MOVING;
-                    return this.step();
+                    return this.iterate();
                 }
                 this.p = this.ConvexHull[n - 3];
                 this.q = this.ConvexHull[n - 2];
@@ -281,7 +277,7 @@ function ConvexHullAlgorithm(points, auxF) {
                     return true;
                 }
                 this.state=this.States.MOVING;
-                return this.step();
+                return this.iterate();
         }
         return true;
     }
