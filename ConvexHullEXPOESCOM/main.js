@@ -15,7 +15,7 @@ window.onload = function () {
         return this.path('M' + startX + ' ' + startY + ' L' + endX + ' ' + endY);
     };
 
-    var paper = Raphael("canvas", 800, 800);
+    var paper = Raphael("canvas", 680, 680);
     var clearbtn = $('#clearbtn');
     var randombtn = $('#randombtn');
     var runbtn = $('#runbtn');
@@ -43,10 +43,23 @@ window.onload = function () {
         }, 100);
     }
 
+    function addPointToList(p){
+      var node = document.createElement("li");
+      var textnode = document.createTextNode("("+p.x + "," +p.y+")");
+      node.appendChild(textnode);
+      document.getElementById("PointsInCH").appendChild(node);
+    }
+
+    function removePointFromList(){
+      $('li', ul).last().remove()
+    }
+
+
 
     var auxF = {
         lineAnim: lineAnim,
         deleteLineAnim: deleteLineAnim,
+        addPointToList: addPointToList,
     };
 
     function getMousePos(e) {
@@ -83,7 +96,7 @@ window.onload = function () {
 
     function clear() {
         paper.clear();
-        canvas = paper.rect(0, 0, 800, 800, 40).attr({
+        canvas = paper.rect(0, 0, 680, 680, 40).attr({
             fill: '#62a8ba',
             stroke: "none"
         });
@@ -93,7 +106,7 @@ window.onload = function () {
         convexH = null;
         runbtn.text('Iniciar');
         runbtn.attr('disabled', false);
-
+        $("#PointsInCH").empty();
         canvas.mouseup(function (e) {
             p = getMousePos(e);
             addPointAnim(p);
@@ -166,8 +179,8 @@ window.onload = function () {
 
 function CHAlgorith(points, auxF) {
     this.States = {
-        SORTING: 's',  
-        MOVING: 'm',  
+        SORTING: 's',
+        MOVING: 'm',
         VERIFYING: 'v',
         DONE: 'd'
     };
@@ -196,6 +209,7 @@ function CHAlgorith(points, auxF) {
     this.addToHull = function (index) {
         var p = this.points[index];
         this.ConvexHull.push(p);
+        this.auxF.addPointToList(p);
         var n = this.ConvexHull.length;
         if (this.auxF) {
             if (n > 1) {
@@ -207,6 +221,10 @@ function CHAlgorith(points, auxF) {
     this.removeFromHull = function () {
         var n = this.ConvexHull.length;
         var p = this.ConvexHull[n - 2];
+        var paux=this.ConvexHull[n-1];
+        $('li', PointsInCH).last().remove()
+        $('li', PointsInCH).last().remove()
+        this.auxF.addPointToList(paux);
         this.ConvexHull.splice(n - 2, 1);
         n--;
         if (this.auxF) {
@@ -255,6 +273,7 @@ function CHAlgorith(points, auxF) {
                     if (this.i == -1) {
                         this.ConvexHull.splice(this.ConvexHull.length - 1);
                         this.state=this.States.DONE;
+                        $('li', PointsInCH).last().remove()
                         return false;
                     }
                 }

@@ -1,18 +1,40 @@
-#body {
+body{
+  background-color: #20a9af;
+  }
+  #body {
         margin: 0;
         padding: 0px 0px 20px 0px;
         text-align: center;
     }
 
+    #body #grid #leftPanel{
 
+      width: 400px;
+      display: inline-block;
+      vertical-align: top;
+      padding: 30px;
+    }
+    #body #grid p{
+      text-align: justify;
+    }
 
-    #body #canvas {
-        height: 800px;
+    #body #grid #canvas {
+        height: 680px;
+        display: inline-block;
         margin: 0 auto;
-        text-align: left;
-        width: 800px;
+        text-align: center;
+        width: 680px;
+        padding: 0px;
         padding-bottom: 10px;
         cursor: crosshair;
+    }
+
+    #body #grid  #rightPanel{
+      background-color: #20a9af;
+      width: 400px;
+      display: inline-block;
+      vertical-align: top;
+      padding: 30px;
     }
 
     #body button {
