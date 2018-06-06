@@ -37,10 +37,23 @@ window.onload = function () {
         }, 100);
     }
 
-    function deleteLineAnim(p, q) {
-        p.main_line.animate({
-            'stroke-width': '0'
-        }, 100);
+
+    function updateColorAnim(p){
+      c = paper.circle(p.x, p.y, 1).animate({
+          r: 10,
+          fill: '#131723',
+          "stroke-width": 0
+      }, 200);
+    }
+
+    function deleteLineAnim(p) {
+      p.main_line.animate({
+        'stroke': 'rgba(255, 0, 0, 0.69)',
+      },(4000) / (points.length )*2);
+      p.main_line.animate({
+        //'stroke': 'rgba(255, 0, 0, 0.69)',
+        'stroke-width': '0'
+      },(1000) );
     }
 
     function addPointToList(p){
@@ -150,7 +163,7 @@ window.onload = function () {
                     runbtn.attr('disabled', true);
                     clearbtn.attr('disabled', false);
                 }
-            }, (4000) / (points.length * 2));
+            }, (4000/100) );
         }
     }
 
@@ -203,8 +216,8 @@ function CHAlgorith(points, auxF) {
     }
 
     this.rightSide = function (p, q, r) {
-        var D = p.x * q.y - p.x * r.y - p.y * q.x + p.y * r.x + q.x * r.y - q.y * r.x;
-        return D > 0;
+        var determinante = p.x * q.y - p.x * r.y - p.y * q.x + p.y * r.x + q.x * r.y - q.y * r.x;
+        return determinante >= 0;
     }
 
     this.addToHull = function (index) {
@@ -289,7 +302,7 @@ function CHAlgorith(points, auxF) {
                 this.addToHull(this.i);
                 document.getElementById("currentState").innerHTML = "Agregando  punto: ("+ points[this.i].x+ "," +points[this.i].y+")";
                 this.state=this.States.VERIFYING;
-                this.r = this.ConvexHull[this.ConvexHull.length - 1];
+                this.r = this.Convex  Hull[this.ConvexHull.length - 1];
                 return true;
 
             case this.States.VERIFYING:
