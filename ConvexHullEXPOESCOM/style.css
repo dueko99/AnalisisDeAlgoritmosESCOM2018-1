@@ -17,6 +17,11 @@ body{
     #body #grid p{
       text-align: justify;
     }
+    #body #grid pre{
+      text-align: justify;
+      width: 680px;
+
+    }
 
     #body #grid #canvas {
         height: 680px;

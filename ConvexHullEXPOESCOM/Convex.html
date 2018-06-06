@@ -12,26 +12,58 @@
 
 <body>
 <div id="body">
-    <h2>ConvexHull EquipoArbol</h2>
+    <h2>ConvexHull</h2>
     <div id="grid">
       <div id="leftPanel">
-      <p>
-        El Convex Hull Algorithm (Envolvente convexa) es un algoritmo voraz
-        que se encarga de encontrar el minimmo conjunto convexo que contenga
-        un conjunto dado de puntos.
-      </p>
-      <p>Este problema es fundamental de la geometria computacional.
-      </p>
-      <h2>Sus aplicaciones abarcan:</h2>
-      <ul>
-        <li>Geometria</li>
-        <li>Graficos de computadora</li>
-        <li>Planeo de rutas para robots</li>
-      </ul>
+      <pre>
+El Convex Hull Algorithm (Envolvente convexa) es un
+algoritmo voraz usado para encontrar el minimmo conjunto
+convexo que contenga un conjunto dado de puntos.
+      </pre>
+      <h3>Aplicaciones</h3>
+      <pre>
+  -Geometria
+  -Graficos de computadora
+  -Planeo de rutas para robot
+  -etc.
+      </pre>
+      <h3>Algoritmo</h3>
+      		<pre>
+Ordene los puntos de P por la coordenada x (en caso de un
+empate, ordene por coordenada y).
+
+Inicialice U y L como listas vacías.
+Las listas contendrán los vértices de los cascos superior
+e inferior.
+
+para i = 1, 2, ..., n:
+	mientras que L contiene al menos dos puntos y la
+  secuencia de los dos últimos puntos
+	de L y el punto P [i] no hace un giro en sentido
+  antihorario:
+    	eliminar el último punto de L
+    añadir P [i] a L
+
+para i = n, n - 1, ..., 1:
+	mientras que U contiene al menos dos puntos y la
+  secuencia de los dos últimos puntos
+    de U y el punto P [i] no hace un giro en sentido
+    antihorario:
+    	eliminar el último punto de U
+    añadir P [i] a U
+
+Elimine el último punto de cada lista (es el mismo que
+el primer punto de la otra lista).
+Concatenar L y U para obtener el casco convexo de P.
+Los puntos en el resultado se enumerarán en el sentido
+contrario a las agujas del reloj.
+      		</pre>
     </div>
     <div id="canvas"></div>
     <div id="rightPanel">
       <p>
+        <h2>Paso Actual</h2>
+        <p id="currentState"></p>
         <h2>Puntos del ConvexHull</h2>
         <ul id="PointsInCH">
 

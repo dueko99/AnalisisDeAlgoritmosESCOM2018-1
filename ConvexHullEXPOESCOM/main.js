@@ -107,6 +107,7 @@ window.onload = function () {
         runbtn.text('Iniciar');
         runbtn.attr('disabled', false);
         $("#PointsInCH").empty();
+        document.getElementById("currentState").innerHTML = "Esperando...";
         canvas.mouseup(function (e) {
             p = getMousePos(e);
             addPointAnim(p);
@@ -237,23 +238,28 @@ function CHAlgorith(points, auxF) {
     this.iterate = function () {
         switch (this.state) {
             case this.States.DONE:
-                return false;
+            return false;
 
             case this.States.SORTING:
+                document.getElementById("currentState").innerHTML = "Ordenando! puntos...";
                 this.convexSort();
                 this.state=this.States.MOVING;
                 return this.iterate();
 
             case this.States.MOVING:
+            document.getElementById("currentState").innerHTML = "Buscando siguiente punto";
                 if (this.i == 0 && this.toTheRight) {
                     if (this.points.length > 0) {
+                      document.getElementById("currentState").innerHTML = "Agregando primer punto: ("+ points[0].x+ "," +points[0].y+")";
                         this.addToHull(0);
                         if (this.points.length > 1) {
+                          document.getElementById("currentState").innerHTML = "Agregando : ("+ points[1].x+ "," +points[1].y+")";
                             this.addToHull(1);
                         }
                     }
                     this.i = 1;
                     if (this.points.length <= 2) {
+                      document.getElementById("currentState").innerHTML = "No hay suficientes puntos";
                         this.state=this.States.DONE;
                     }
                     return this.state != this.States.DONE;
@@ -265,6 +271,7 @@ function CHAlgorith(points, auxF) {
                         this.i = this.points.length - 2;
                         this.toTheRight = false;
                         this.addToHull(this.i);
+                        document.getElementById("currentState").innerHTML = "Agregando primer punto: ("+ points[0].x+ "," +points[0].y+")";
                     }
                 }
 
@@ -272,6 +279,7 @@ function CHAlgorith(points, auxF) {
                     this.i--;
                     if (this.i == -1) {
                         this.ConvexHull.splice(this.ConvexHull.length - 1);
+                        document.getElementById("currentState").innerHTML = "Terminado!";
                         this.state=this.States.DONE;
                         $('li', PointsInCH).last().remove()
                         return false;
@@ -279,11 +287,13 @@ function CHAlgorith(points, auxF) {
                 }
 
                 this.addToHull(this.i);
+                document.getElementById("currentState").innerHTML = "Agregando  punto: ("+ points[this.i].x+ "," +points[this.i].y+")";
                 this.state=this.States.VERIFYING;
                 this.r = this.ConvexHull[this.ConvexHull.length - 1];
                 return true;
 
             case this.States.VERIFYING:
+            document.getElementById("currentState").innerHTML = "Verificando...";
                 n = this.ConvexHull.length;
                 if (n <= 2) {
                     this.state=this.States.MOVING;
