@@ -15,7 +15,7 @@ window.onload = function () {
         return this.path('M' + startX + ' ' + startY + ' L' + endX + ' ' + endY);
     };
 
-    var paper = Raphael("canvas", 680, 680);
+    var paper = Raphael("canvas", 500, 400);
     var clearbtn = $('#clearbtn');
     var randombtn = $('#randombtn');
     var runbtn = $('#runbtn');
@@ -109,7 +109,7 @@ window.onload = function () {
 
     function clear() {
         paper.clear();
-        canvas = paper.rect(0, 0, 680, 680, 40).attr({
+        canvas = paper.rect(0, 0, 500, 400, 40).attr({
             fill: '#62a8ba',
             stroke: "none"
         });
@@ -163,7 +163,7 @@ window.onload = function () {
                     runbtn.attr('disabled', true);
                     clearbtn.attr('disabled', false);
                 }
-            }, (4000/100) );
+            }, 800 );
         }
     }
 
@@ -178,7 +178,7 @@ window.onload = function () {
     randombtn.click(function () {
         if (!locked) {
             for (var i = 0; i < 10; i++) {
-                var per = 0.6;
+                var per = 0.9;
                 var x = Math.floor(Math.random() * paper.width);
                 var y = Math.floor(Math.random() * paper.height);
                 x = Math.floor(x * per + ((1.0 - per) / 2.0) * paper.width);
@@ -302,11 +302,11 @@ function CHAlgorith(points, auxF) {
                 this.addToHull(this.i);
                 document.getElementById("currentState").innerHTML = "Agregando  punto: ("+ points[this.i].x+ "," +points[this.i].y+")";
                 this.state=this.States.VERIFYING;
-                this.r = this.Convex  Hull[this.ConvexHull.length - 1];
+                this.r = this.ConvexHull[this.ConvexHull.length - 1];
                 return true;
 
             case this.States.VERIFYING:
-            document.getElementById("currentState").innerHTML = "Verificando...";
+            	document.getElementById("currentState").innerHTML = "Verificando...";
                 n = this.ConvexHull.length;
                 if (n <= 2) {
                     this.state=this.States.MOVING;
