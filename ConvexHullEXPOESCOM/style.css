@@ -2,47 +2,50 @@ body{
   background-color: #20a9af;
   }
   #body {
-        margin: 0;
-        padding: 0px 0px 20px 0px;
-        text-align: center;
     }
-
-    #body #grid #leftPanel{
-
-      width: 400px;
+    h3,h2{
+    	text-align: center;
+    }
+    #leftPanel{
+      max-width: 30%;
       display: inline-block;
       vertical-align: top;
-      padding: 30px;
+      padding: 5px;
+      margin-left: 0px;
     }
-    #body #grid p{
+    p{
       text-align: justify;
     }
-    #body #grid pre{
-      text-align: justify;
-      width: 680px;
 
-    }
-
-    #body #grid #canvas {
-        height: 680px;
-        display: inline-block;
-        margin: 0 auto;
-        text-align: center;
-        width: 680px;
-        padding: 0px;
-        padding-bottom: 10px;
+    #canvas {
+        height: 400px;
+        display: inline-block;  
+        width: 500px;
+        padding: 10px;
+        padding-bottom: 5px;
         cursor: crosshair;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    #body #grid  #rightPanel{
+    #rightPanel{
       background-color: #20a9af;
-      width: 400px;
+      max-width: 30%;
       display: inline-block;
       vertical-align: top;
-      padding: 30px;
+      padding: 5px;
     }
 
     #body button {
         font-size: 1.2em;
         width: 120px;
+    }
+    #botones{
+    	text-align: center;
+    }
+    #p4,#p8,#p6,#p10{
+    	margin-left: 20px;
+    }
+    #p5,#p9{
+    	margin-left: 40px;	
     }
